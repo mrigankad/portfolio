@@ -2,12 +2,62 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { frameIndexForProgress, coverRect } from './scrub-math.js';
 
+function wireHeroChrome() {
+  gsap.fromTo('.hero-title', { opacity: 0, y: 28 }, {
+    opacity: 1, y: 0, ease: 'none',
+    scrollTrigger: { trigger: '#hero', start: '55% top', end: '78% top', scrub: true },
+  });
+
+  gsap.to('.scroll-cue', {
+    opacity: 0, ease: 'none',
+    scrollTrigger: { trigger: '#hero', start: 'top top', end: '15% top', scrub: true },
+  });
+}
+
+function initMobileHero(wrap, video) {
+  let settled = false;
+  let resolveReady;
+  const ready = new Promise((resolve) => { resolveReady = resolve; });
+  const settle = () => {
+    if (settled) return;
+    settled = true;
+    resolveReady();
+    video.play().catch(() => { /* The first frame remains visible as a fallback. */ });
+  };
+
+  video.muted = true;
+  video.defaultMuted = true;
+  video.playsInline = true;
+  if (video.readyState >= 2) queueMicrotask(settle);
+  else {
+    video.addEventListener('loadeddata', settle, { once: true });
+    video.addEventListener('error', settle, { once: true });
+    video.load();
+  }
+  video.play().catch(() => { /* loadeddata retries playback. */ });
+
+  gsap.to(wrap, {
+    opacity: 0, ease: 'none',
+    scrollTrigger: {
+      trigger: '#hero', start: '82% top', end: '98% top', scrub: true,
+      onLeave: () => { wrap.style.display = 'none'; },
+      onEnterBack: () => { wrap.style.display = ''; },
+    },
+  });
+
+  return { ready };
+}
+
 export function initHero(meta) {
   const wrap = document.getElementById('canvas-wrap');
   const canvas = document.getElementById('hero-canvas');
-  const ctx = canvas.getContext('2d');
   const stage = document.getElementById('stage');
   const desktop = matchMedia('(min-width: 820px)').matches;
+  const mobileVideo = document.getElementById('hero-mobile-video');
+  wireHeroChrome();
+  if (!desktop && mobileVideo) return initMobileHero(wrap, mobileVideo);
+
+  const ctx = canvas.getContext('2d');
   const { count, dir } = meta.hero;
   const dpr = Math.min(devicePixelRatio || 1, 2);
 
@@ -84,16 +134,6 @@ export function initHero(meta) {
     },
   });
 
-  gsap.fromTo('.hero-title', { opacity: 0, y: 28 }, {
-    opacity: 1, y: 0, ease: 'none',
-    scrollTrigger: { trigger: '#hero', start: '55% top', end: '78% top', scrub: true },
-  });
-
-  gsap.to('.scroll-cue', {
-    opacity: 0, ease: 'none',
-    scrollTrigger: { trigger: '#hero', start: 'top top', end: '15% top', scrub: true },
-  });
-
   if (desktop) {
     // Morph the fixed canvas into the live rect of #stage; when they coincide, swap.
     const fullRect = () => ({ x: 0, y: 0, w: innerWidth, h: innerHeight });
@@ -116,16 +156,6 @@ export function initHero(meta) {
       },
       onLeave: () => { wrap.style.display = 'none'; },
       onEnterBack: () => { wrap.style.display = ''; },
-    });
-  } else {
-    // Mobile has no column to morph into, so fade out at the end of the runway.
-    gsap.to(wrap, {
-      opacity: 0, ease: 'none',
-      scrollTrigger: {
-        trigger: '#hero', start: '82% top', end: '98% top', scrub: true,
-        onLeave: () => { wrap.style.display = 'none'; },
-        onEnterBack: () => { wrap.style.display = ''; },
-      },
     });
   }
 

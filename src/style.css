@@ -138,6 +138,7 @@
     mask-composite: intersect;
   }
   #hero-canvas { width: 100%; height: 100%; }
+  #hero-mobile-video { display: none; width: 100%; height: 100%; object-fit: cover; }
   #hero-poster {
     display: none; position: absolute; top: 12vh; left: 50%;
     transform: translateX(-50%); height: 76vh; width: auto; max-width: 94vw;
@@ -240,6 +241,8 @@
 
   /* ---------- mobile (must stay in sync with the 820px matchMedia in JS) ---------- */
   @media (max-width: 819px) {
+    #hero-canvas { display: none; }
+    #hero-mobile-video { display: block; }
     .page { grid-template-columns: 1fr; }
     .char-col { display: none; }
     .inline-stage {
