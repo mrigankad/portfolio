@@ -32,6 +32,7 @@ async function boot() {
   } catch { /* fall through to static mode */ }
 
   if (meta?.bgHex) document.documentElement.style.setProperty('--bg', meta.bgHex);
+  if (meta?.bgLightHex) document.documentElement.style.setProperty('--bg-light', meta.bgLightHex);
   if (!meta || reduced) {
     staticMode(meta);
     return;

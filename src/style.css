@@ -11,7 +11,8 @@
 }
 
 :root {
-  --bg: #dac7a4; /* overwritten at runtime from meta.json bgHex */
+  --bg: #dac7a4;        /* overwritten at runtime from meta.json bgHex (vignette edge) */
+  --bg-light: #eadfc4;  /* overwritten at runtime from meta.json bgLightHex (lit center) */
   --stage-w: min(38vw, 520px);
   --stage-top: calc(50vh - (var(--stage-w) * 4 / 3) / 2);
 }
@@ -49,7 +50,7 @@
     z-index: -1;
     pointer-events: none;
     background: radial-gradient(130% 100% at 50% 12%,
-      color-mix(in srgb, var(--bg) 84%, #fff8ec) 0%, var(--bg) 62%);
+      var(--bg-light) 0%, var(--bg) 62%);
   }
 }
 
@@ -60,6 +61,14 @@
     position: fixed; left: 0; top: 0; width: 100vw; height: 100vh;
     z-index: 1; pointer-events: none; will-change: transform, width, height;
     transition: opacity 0.4s ease;
+    /* Same edge feather as #stage so the canvas never shows a hard edge,
+       full-screen or mid-morph. */
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent),
+      linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent),
+      linear-gradient(to bottom, transparent, #000 7%, #000 93%, transparent);
+    mask-composite: intersect;
   }
   #hero-canvas { width: 100%; height: 100%; }
   #hero-poster {
@@ -115,6 +124,7 @@
     aspect-ratio: 4 / 3; border-radius: 14px; margin-bottom: 0.9rem;
     display: grid; place-items: center; color: rgba(255, 255, 255, 0.85);
     font-family: var(--font-display); font-weight: 700; font-size: 1.6rem;
+    overflow: hidden;
   }
   .thumb-a { background: linear-gradient(135deg, #2a7d8c, #7fc4c9); }
   .thumb-b { background: linear-gradient(135deg, #f4a259, #f7cf8f); }

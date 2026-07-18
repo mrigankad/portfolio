@@ -37,12 +37,16 @@ function probeDuration(file) {
     '-of', 'default=nw=1:nk=1', file]).toString().trim());
 }
 
-// Average color of an 8x8 patch near the top-left corner, via raw RGB24 on stdout.
-function cornerHex(image) {
+// Average color of an 8x8 patch at (x, y) — crop accepts ffmpeg expressions.
+function sampleHex(image, x, y) {
   const raw = execFileSync('ffmpeg', ['-loglevel', 'error', '-i', image,
-    '-vf', 'crop=8:8:4:4', '-frames:v', '1', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-']);
+    '-vf', `crop=8:8:${x}:${y}`, '-frames:v', '1', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-']);
   return avgHex(raw);
 }
+// Edge of the backdrop vignette (page base color) and its lit top-center
+// (page gradient center) — both needed for the page to blend with the clips.
+const cornerHex = (image) => sampleHex(image, 4, 4);
+const centerTopHex = (image) => sampleHex(image, 'iw/2-4', 40);
 
 function lastframe(clip, outPath) {
   const out = outPath ?? join(dirname(clip), basename(clip, extname(clip)) + '.last.png');
@@ -57,13 +61,14 @@ function writeMeta(extra) {
   const count = readdirSync(HERO_DIR).filter((f) => f.endsWith('.webp')).length;
   const meta = {
     bgHex: extra.bgHex,
+    bgLightHex: extra.bgLightHex,
     hero: { count, dir: webPath(`${FRAMES}/hero`), width: OUT_W, height: OUT_H },
     hasClips: extra.hasClips,
     posters,
     clips: extra.clips,
   };
   writeFileSync(join(FRAMES, 'meta.json'), JSON.stringify(meta, null, 2));
-  console.log(`meta.json written (${count} hero frames, bg ${extra.bgHex}, hasClips ${extra.hasClips})`);
+  console.log(`meta.json written (${count} hero frames, bg ${extra.bgHex}/${extra.bgLightHex}, hasClips ${extra.hasClips})`);
 }
 
 function placeholders() {
@@ -91,7 +96,7 @@ function placeholders() {
     ff(['-i', padded, '-vf', `scale=960:-2`, join(FRAMES, `poster-${k}.png`)]);
   }
   rmSync(padded);
-  writeMeta({ bgHex, hasClips: false, clips: null });
+  writeMeta({ bgHex, bgLightHex: bgHex, hasClips: false, clips: null });
 }
 
 function build() {
@@ -129,8 +134,8 @@ function build() {
 
   // Sample from the PNG poster (same background as every frame) — ffmpeg's
   // webp decoder can't be trusted with libwebp output.
-  const bgHex = cornerHex(join(FRAMES, 'poster-c1.png'));
-  writeMeta({ bgHex, hasClips: true, clips });
+  const poster = join(FRAMES, 'poster-c1.png');
+  writeMeta({ bgHex: cornerHex(poster), bgLightHex: centerTopHex(poster), hasClips: true, clips });
 }
 
 requireFfmpeg();

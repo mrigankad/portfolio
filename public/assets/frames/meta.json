@@ -1,5 +1,6 @@
 {
   "bgHex": "#dac7a4",
+  "bgLightHex": "#eeddc1",
   "hero": {
     "count": 80,
     "dir": "assets/frames/hero",

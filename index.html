@@ -63,61 +63,201 @@
         </ul>
       </section>
 
+      <section id="experience" class="flex min-h-[80vh] flex-col justify-center py-[12vh]">
+        <h2 class="mb-5 font-display text-[clamp(2rem,4.6vw,3.2rem)] font-bold tracking-[-0.01em]" data-reveal>Where I've worked</h2>
+        <ol class="mt-4 list-none space-y-10 border-l-2 border-ink/10 p-0 pl-8">
+          <li class="relative" data-reveal>
+            <span class="absolute -left-[41px] top-1.5 size-4 rounded-full border-4 border-[var(--bg)] bg-teal"></span>
+            <p class="text-[0.85rem] font-medium uppercase tracking-[0.08em] text-muted">Jun 2026 — present</p>
+            <h3 class="font-display text-[1.2rem] font-bold">Freelance Product Engineer · Independent</h3>
+            <p class="max-w-[54ch] text-[0.98rem] text-muted">Making healthcare billing agentic — designing autonomous, exception-driven
+            revenue-cycle workflows, currently transforming Medisoft LLP's billing cycle into an agentic pipeline.</p>
+          </li>
+          <li class="relative" data-reveal>
+            <span class="absolute -left-[41px] top-1.5 size-4 rounded-full border-4 border-[var(--bg)] bg-teal/70"></span>
+            <p class="text-[0.85rem] font-medium uppercase tracking-[0.08em] text-muted">Oct 2025 — Jun 2026</p>
+            <h3 class="font-display text-[1.2rem] font-bold">Product Engineer · Joules To Watts, Bengaluru</h3>
+            <p class="max-w-[54ch] text-[0.98rem] text-muted">Built the J2W Invoice Engine (multi-tenant SaaS billing) and the Talent Sphere
+            frontend; automated GE Healthcare's CSCS clinical tool with desktop RPA.</p>
+          </li>
+          <li class="relative" data-reveal>
+            <span class="absolute -left-[41px] top-1.5 size-4 rounded-full border-4 border-[var(--bg)] bg-teal/40"></span>
+            <p class="text-[0.85rem] font-medium uppercase tracking-[0.08em] text-muted">Jan 2025 — Jul 2025</p>
+            <h3 class="font-display text-[1.2rem] font-bold">Product Engineer Intern · Mahindra Teqo, Thane</h3>
+            <p class="max-w-[54ch] text-[0.98rem] text-muted">Real-time solar performance analytics dashboards, PV Lab Scheduler improvements,
+            and the TeqoNoc V2 UI redesign.</p>
+          </li>
+        </ol>
+      </section>
+
       <section id="projects" data-section="c3" class="flex min-h-[92vh] flex-col justify-center py-[12vh]">
         <div class="inline-stage" data-clip="c3" aria-hidden="true"></div>
         <h2 class="mb-5 font-display text-[clamp(2rem,4.6vw,3.2rem)] font-bold tracking-[-0.01em]" data-reveal>Selected work</h2>
-        <div class="mt-4 grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-6">
-          <a class="rounded-[20px] border border-ink/10 bg-card p-4 transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_40px_-18px_rgba(34,29,21,0.25)]" href="https://github.com/mrigankad" target="_blank" rel="noopener" data-reveal>
-            <div class="thumb thumb-a">01</div>
-            <h3 class="mb-1 font-display text-[1.1rem] font-bold">GenBI</h3>
-            <p class="text-[0.95rem] text-muted">Natural-language BI — a Text-to-SQL engine that turns questions into queries, charts, and dashboards.</p>
+        <div class="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <a class="group flex flex-col rounded-[20px] border border-ink/10 bg-card p-4 transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_40px_-18px_rgba(34,29,21,0.25)] sm:col-span-2 lg:col-span-2" href="https://github.com/mrigankad" target="_blank" rel="noopener" data-reveal>
+            <div class="thumb aspect-[2.3/1] bg-[#161219]"><img class="h-full w-full object-cover" src="/assets/work/novel-os.webp" alt="Novel OS owl mascot artwork" loading="lazy"></div>
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <h3 class="mb-1 font-display text-[1.15rem] font-bold">Novel-OS</h3>
+                <p class="text-[0.95rem] text-muted">Production-grade multi-agent framework with persistent memory, continuity checking, and a five-stage pipeline.</p>
+              </div>
+              <svg class="mt-1 size-5 shrink-0 text-teal-deep transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+            </div>
+            <span class="mt-3 inline-block self-start rounded-full bg-teal/10 px-3 py-1 text-[0.8rem] font-medium text-teal-deep">Agents · AI</span>
           </a>
-          <a class="rounded-[20px] border border-ink/10 bg-card p-4 transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_40px_-18px_rgba(34,29,21,0.25)]" href="https://github.com/mrigankad" target="_blank" rel="noopener" data-reveal>
-            <div class="thumb thumb-b">02</div>
-            <h3 class="mb-1 font-display text-[1.1rem] font-bold">Novel-OS</h3>
-            <p class="text-[0.95rem] text-muted">Production-grade multi-agent framework with persistent memory and a five-stage pipeline.</p>
+          <a class="group flex flex-col rounded-[20px] border border-ink/10 bg-card p-4 transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_40px_-18px_rgba(34,29,21,0.25)]" href="https://github.com/mrigankad" target="_blank" rel="noopener" data-reveal>
+            <div class="thumb thumb-b text-[1.3rem]">GenBI</div>
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <h3 class="mb-1 font-display text-[1.1rem] font-bold">GenBI</h3>
+                <p class="text-[0.95rem] text-muted">Natural-language BI — Text-to-SQL that turns questions into queries, charts, and dashboards.</p>
+              </div>
+              <svg class="mt-1 size-5 shrink-0 text-teal-deep transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+            </div>
+            <span class="mt-3 inline-block self-start rounded-full bg-teal/10 px-3 py-1 text-[0.8rem] font-medium text-teal-deep">Text-to-SQL · BI</span>
           </a>
-          <a class="rounded-[20px] border border-ink/10 bg-card p-4 transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_40px_-18px_rgba(34,29,21,0.25)]" href="https://github.com/mrigankad" target="_blank" rel="noopener" data-reveal>
-            <div class="thumb thumb-c">03</div>
-            <h3 class="mb-1 font-display text-[1.1rem] font-bold">Mimicry</h3>
-            <p class="text-[0.95rem] text-muted">Self-hosted zero-shot voice cloning — F5-TTS with a FastAPI backend and async Python SDK.</p>
+          <a class="group flex flex-col rounded-[20px] border border-ink/10 bg-card p-4 transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_40px_-18px_rgba(34,29,21,0.25)]" href="https://github.com/mrigankad" target="_blank" rel="noopener" data-reveal>
+            <div class="thumb"><img class="h-full w-full object-cover" src="/assets/work/mimicry.webp" alt="Mimicry app screenshot" loading="lazy"></div>
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <h3 class="mb-1 font-display text-[1.1rem] font-bold">Mimicry</h3>
+                <p class="text-[0.95rem] text-muted">Self-hosted zero-shot voice cloning — F5-TTS, FastAPI, async Python SDK.</p>
+              </div>
+              <svg class="mt-1 size-5 shrink-0 text-teal-deep transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+            </div>
+            <span class="mt-3 inline-block self-start rounded-full bg-teal/10 px-3 py-1 text-[0.8rem] font-medium text-teal-deep">Voice AI</span>
           </a>
-          <a class="rounded-[20px] border border-ink/10 bg-card p-4 transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_40px_-18px_rgba(34,29,21,0.25)]" href="https://github.com/mrigankad" target="_blank" rel="noopener" data-reveal>
-            <div class="thumb thumb-d">04</div>
-            <h3 class="mb-1 font-display text-[1.1rem] font-bold">Desktop Automation Suite</h3>
-            <p class="text-[0.95rem] text-muted">RPA for legacy Windows apps with no API — WinAppDriver, Appium, and Java Access Bridge.</p>
+          <a class="group flex flex-col rounded-[20px] border border-ink/10 bg-card p-4 transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_40px_-18px_rgba(34,29,21,0.25)] sm:col-span-2 lg:col-span-2" href="https://github.com/mrigankad" target="_blank" rel="noopener" data-reveal>
+            <div class="thumb thumb-d aspect-[2.3/1] text-[1.3rem]">RPA</div>
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <h3 class="mb-1 font-display text-[1.15rem] font-bold">Desktop Automation Suite</h3>
+                <p class="text-[0.95rem] text-muted">RPA for legacy Windows apps with no API — WinAppDriver, Appium, and Java Access Bridge.</p>
+              </div>
+              <svg class="mt-1 size-5 shrink-0 text-teal-deep transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+            </div>
+            <span class="mt-3 inline-block self-start rounded-full bg-teal/10 px-3 py-1 text-[0.8rem] font-medium text-teal-deep">RPA · Automation</span>
           </a>
+        </div>
+      </section>
+
+      <section id="play" class="flex min-h-[80vh] flex-col justify-center py-[12vh]">
+        <h2 class="mb-5 font-display text-[clamp(2rem,4.6vw,3.2rem)] font-bold tracking-[-0.01em]" data-reveal>Beyond the screen</h2>
+        <p class="max-w-[54ch] text-[1.12rem] text-muted" data-reveal>Before the automation work there was — and still is — a lot of 3D and ink:
+        a software 3D engine written from scratch in Go, merged fixes in three.js, Blender mecha models,
+        and a growing library of hand-drawn Gundam artwork.</p>
+        <ul class="mt-5 flex list-none flex-wrap gap-3 p-0" data-reveal>
+          <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/threedotjs" alt="" loading="lazy">three.js contributor</li>
+          <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/blender" alt="" loading="lazy">Blender</li>
+          <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/go" alt="" loading="lazy">Custom 3D engine in Go</li>
+        </ul>
+        <div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+          <img class="aspect-square w-full rounded-2xl object-cover transition duration-300 hover:scale-[1.03]" src="/assets/art/art-01.webp" alt="Hand-drawn Gundam mecha artwork" loading="lazy" data-reveal>
+          <img class="aspect-square w-full rounded-2xl object-cover transition duration-300 hover:scale-[1.03]" src="/assets/art/art-02.webp" alt="Hand-drawn Gundam mecha artwork" loading="lazy" data-reveal>
+          <img class="aspect-square w-full rounded-2xl object-cover transition duration-300 hover:scale-[1.03]" src="/assets/art/art-03.webp" alt="Hand-drawn Gundam mecha artwork" loading="lazy" data-reveal>
+          <img class="aspect-square w-full rounded-2xl object-cover transition duration-300 hover:scale-[1.03]" src="/assets/art/art-04.webp" alt="Hand-drawn Gundam mecha artwork" loading="lazy" data-reveal>
+        </div>
+        <div class="mt-4 flex items-center gap-4 self-start rounded-2xl border border-ink/10 bg-card p-4" data-reveal>
+          <img class="h-16 w-auto" src="/assets/work/snorlax-engine.webp" alt="Snorlax Engine mascot" loading="lazy">
+          <p class="max-w-[40ch] text-[0.95rem] text-muted"><strong class="text-ink">Snorlax Engine</strong> — a 3D engine written from scratch in Go.
+          Named after the sleepiest Pokémon; renders anyway.</p>
         </div>
       </section>
 
       <section id="skills" data-section="c4" class="flex min-h-[92vh] flex-col justify-center py-[12vh]">
         <div class="inline-stage" data-clip="c4" aria-hidden="true"></div>
         <h2 class="mb-5 font-display text-[clamp(2rem,4.6vw,3.2rem)] font-bold tracking-[-0.01em]" data-reveal>Skills &amp; tools</h2>
-        <ul class="flex max-w-[52ch] list-none flex-wrap gap-3 p-0" data-reveal>
-          <li class="rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.95rem] font-medium">Python</li>
-          <li class="rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.95rem] font-medium">TypeScript</li>
-          <li class="rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.95rem] font-medium">React / Next.js</li>
-          <li class="rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.95rem] font-medium">Go</li>
-          <li class="rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.95rem] font-medium">FastAPI</li>
-          <li class="rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.95rem] font-medium">Tailwind CSS</li>
-          <li class="rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.95rem] font-medium">Design systems</li>
-          <li class="rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.95rem] font-medium">Figma &amp; prototyping</li>
-          <li class="rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.95rem] font-medium">Multi-agent AI</li>
-          <li class="rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.95rem] font-medium">Text-to-SQL</li>
-          <li class="rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.95rem] font-medium">Desktop RPA</li>
-          <li class="rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.95rem] font-medium">Power BI / Tableau</li>
-        </ul>
+        <div class="mt-2 max-w-[62ch] space-y-7">
+          <div data-reveal>
+            <h3 class="mb-3 text-[0.85rem] font-bold uppercase tracking-[0.08em] text-muted">Languages</h3>
+            <ul class="flex list-none flex-wrap gap-3 p-0">
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/python" alt="" loading="lazy">Python</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/typescript" alt="" loading="lazy">TypeScript</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/javascript" alt="" loading="lazy">JavaScript</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/go" alt="" loading="lazy">Go</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">Java</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">SQL &amp; DAX</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/html5" alt="" loading="lazy">HTML / CSS</li>
+            </ul>
+          </div>
+          <div data-reveal>
+            <h3 class="mb-3 text-[0.85rem] font-bold uppercase tracking-[0.08em] text-muted">Frontend &amp; product</h3>
+            <ul class="flex list-none flex-wrap gap-3 p-0">
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/react" alt="" loading="lazy">React</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/nextdotjs" alt="" loading="lazy">Next.js</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/vite" alt="" loading="lazy">Vite</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/tailwindcss" alt="" loading="lazy">Tailwind CSS</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/chakraui" alt="" loading="lazy">Chakra UI</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/figma" alt="" loading="lazy">Figma</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">Design systems</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">Prototyping &amp; usability</li>
+            </ul>
+          </div>
+          <div data-reveal>
+            <h3 class="mb-3 text-[0.85rem] font-bold uppercase tracking-[0.08em] text-muted">AI systems</h3>
+            <ul class="flex list-none flex-wrap gap-3 p-0">
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">Multi-agent orchestration</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">RAG</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">Text-to-SQL</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/googlegemini" alt="" loading="lazy">Gemini API</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">VLMs</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">Groq</li>
+            </ul>
+          </div>
+          <div data-reveal>
+            <h3 class="mb-3 text-[0.85rem] font-bold uppercase tracking-[0.08em] text-muted">Automation &amp; RPA</h3>
+            <ul class="flex list-none flex-wrap gap-3 p-0">
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/appium" alt="" loading="lazy">Appium</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">WinAppDriver</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">Playwright</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/n8n" alt="" loading="lazy">n8n</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">Java Access Bridge</li>
+            </ul>
+          </div>
+          <div data-reveal>
+            <h3 class="mb-3 text-[0.85rem] font-bold uppercase tracking-[0.08em] text-muted">BI &amp; analytics</h3>
+            <ul class="flex list-none flex-wrap gap-3 p-0">
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">Power BI</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">Tableau</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/qlik" alt="" loading="lazy">Qlik Sense</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">IBM Cognos</li>
+            </ul>
+          </div>
+          <div data-reveal>
+            <h3 class="mb-3 text-[0.85rem] font-bold uppercase tracking-[0.08em] text-muted">Backend &amp; cloud</h3>
+            <ul class="flex list-none flex-wrap gap-3 p-0">
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/fastapi" alt="" loading="lazy">FastAPI</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/docker" alt="" loading="lazy">Docker</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">AWS EC2 / S3</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/datadog" alt="" loading="lazy">Datadog</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/git" alt="" loading="lazy">Git</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">ServiceNow</li>
+            </ul>
+          </div>
+        </div>
       </section>
 
       <section id="contact" data-section="c5" class="flex min-h-[92vh] flex-col justify-center py-[12vh]">
         <div class="inline-stage" data-clip="c5" aria-hidden="true"></div>
         <h2 class="mb-5 font-display text-[clamp(2rem,4.6vw,3.2rem)] font-bold tracking-[-0.01em]" data-reveal>Let's make something</h2>
         <p class="max-w-[52ch] text-[1.12rem] text-muted" data-reveal>Have a project in mind, or just want to say hi?</p>
-        <a class="mt-4 inline-block self-start rounded-full bg-teal px-6 py-3.5 font-display text-[clamp(1.05rem,2.4vw,1.4rem)] font-bold text-white transition hover:-translate-y-1 hover:bg-teal-deep" data-reveal href="mailto:mriganka.uiux@gmail.com">mriganka.uiux@gmail.com</a>
-        <div class="mt-6 flex flex-wrap gap-6 font-medium text-teal-deep" data-reveal>
-          <a class="hover:underline" href="https://www.linkedin.com/in/kamigorosh1" target="_blank" rel="noopener">LinkedIn</a>
-          <a class="hover:underline" href="https://github.com/mrigankad" target="_blank" rel="noopener">GitHub</a>
-          <a class="hover:underline" href="https://ascenddesign.in/" target="_blank" rel="noopener">ascenddesign.in</a>
+        <a class="mt-4 flex items-center gap-3 self-start rounded-full bg-teal px-6 py-3.5 font-display text-[clamp(1.05rem,2.4vw,1.4rem)] font-bold text-white transition hover:-translate-y-1 hover:bg-teal-deep" data-reveal href="mailto:mriganka.uiux@gmail.com">
+          <svg class="size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+          mriganka.uiux@gmail.com
+        </a>
+        <div class="mt-6 flex flex-wrap gap-3 font-medium text-teal-deep" data-reveal>
+          <a class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 transition hover:-translate-y-0.5 hover:border-teal hover:text-teal" href="https://github.com/mrigankad" target="_blank" rel="noopener">
+            <svg class="size-4.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.12 3.05.74.8 1.18 1.83 1.18 3.09 0 4.43-2.69 5.4-5.26 5.68.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .31.21.68.8.56A11.52 11.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+            GitHub
+          </a>
+          <a class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 transition hover:-translate-y-0.5 hover:border-teal hover:text-teal" href="https://www.linkedin.com/in/kamigorosh1" target="_blank" rel="noopener">
+            <svg class="size-4.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0Z"/></svg>
+            LinkedIn
+          </a>
+          <a class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 transition hover:-translate-y-0.5 hover:border-teal hover:text-teal" href="https://ascenddesign.in/" target="_blank" rel="noopener">
+            <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            ascenddesign.in
+          </a>
         </div>
       </section>
     </div>
