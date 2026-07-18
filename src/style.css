@@ -241,8 +241,16 @@
 
   /* ---------- mobile (must stay in sync with the 820px matchMedia in JS) ---------- */
   @media (max-width: 819px) {
+    #canvas-wrap {
+      background: url('/assets/frames/hero/hero-0001.webp') center / cover no-repeat;
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
     #hero-canvas { display: none; }
-    #hero-mobile-video { display: block; }
+    #hero-mobile-video {
+      display: block; position: absolute; inset: 0;
+      visibility: visible; opacity: 1;
+    }
     .page { grid-template-columns: 1fr; }
     .char-col { display: none; }
     .inline-stage {
