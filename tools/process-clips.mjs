@@ -101,8 +101,10 @@ function build() {
   mkdirSync(HERO_DIR, { recursive: true });
 
   // Hero frame sequence from c1 (10 fps, 1600px wide WebP).
+  // -f image2 + -c:v libwebp: without these, ffmpeg 8 picks the animated-webp
+  // encoder and packs every frame into a single file.
   ff(['-i', join(CLIPS, 'c1.mp4'), '-vf', `fps=10,scale=${OUT_W}:${OUT_H}:flags=lanczos`,
-    '-quality', '72', join(HERO_DIR, 'hero-%04d.webp')]);
+    '-f', 'image2', '-c:v', 'libwebp', '-quality', '72', join(HERO_DIR, 'hero-%04d.webp')]);
 
   // Posters: the LAST frame of each clip (= that section's resting pose).
   for (const k of ['c1', ...REACTIONS]) {
@@ -119,7 +121,9 @@ function build() {
     clips[k] = { src: out.replaceAll('\\', '/'), duration: Math.round(probeDuration(out) * 100) / 100 };
   }
 
-  const bgHex = cornerHex(join(HERO_DIR, 'hero-0001.webp'));
+  // Sample from the PNG poster (same background as every frame) — ffmpeg's
+  // webp decoder can't be trusted with libwebp output.
+  const bgHex = cornerHex(join(FRAMES, 'poster-c1.png'));
   writeMeta({ bgHex, hasClips: true, clips });
 }
 

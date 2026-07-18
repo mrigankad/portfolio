@@ -1,12 +1,12 @@
 {
-  "bgHex": "#fefefe",
+  "bgHex": "#dac7a4",
   "hero": {
     "count": 80,
     "dir": "assets/frames/hero",
     "width": 1600,
     "height": 900
   },
-  "hasClips": false,
+  "hasClips": true,
   "posters": {
     "c1": "assets/frames/poster-c1.png",
     "c2": "assets/frames/poster-c2.png",
@@ -14,5 +14,22 @@
     "c4": "assets/frames/poster-c4.png",
     "c5": "assets/frames/poster-c5.png"
   },
-  "clips": null
+  "clips": {
+    "c2": {
+      "src": "assets/frames/c2.web.mp4",
+      "duration": 8
+    },
+    "c3": {
+      "src": "assets/frames/c3.web.mp4",
+      "duration": 8
+    },
+    "c4": {
+      "src": "assets/frames/c4.web.mp4",
+      "duration": 8
+    },
+    "c5": {
+      "src": "assets/frames/c5.web.mp4",
+      "duration": 8
+    }
+  }
 }
