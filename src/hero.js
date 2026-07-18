@@ -30,7 +30,7 @@ export function initHero(meta) {
       canvas.height = h * dpr;
     }
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    // Resizing the backing store resets context state — re-request quality filtering.
+    // Resizing the backing store resets context state, so restore quality filtering.
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = 'high';
     const s = coverRect(img.naturalWidth, img.naturalHeight, w, h);
@@ -118,7 +118,7 @@ export function initHero(meta) {
       onEnterBack: () => { wrap.style.display = ''; },
     });
   } else {
-    // Mobile: no column to morph into — fade the canvas out at the end of the runway.
+    // Mobile has no column to morph into, so fade out at the end of the runway.
     gsap.to(wrap, {
       opacity: 0, ease: 'none',
       scrollTrigger: {

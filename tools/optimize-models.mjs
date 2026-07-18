@@ -9,7 +9,7 @@ const SRC = 'C:/Users/mriga_ijtdono/Desktop/Mriganka/Portfolio/public/models';
 const OUT = 'public/assets/models';
 
 const MODELS = [
-  { id: 'all-for-one-chaos', dir: 'characters/all-for-one', glb: 'all-for-one-chaos', thumb: 'all-for-one-chaos.png', title: 'All For One — Chaos' },
+  { id: 'all-for-one-chaos', dir: 'characters/all-for-one', glb: 'all-for-one-chaos', thumb: 'all-for-one-chaos.png', title: 'All For One: Chaos' },
   { id: 'armored-all-might', dir: 'characters/all-might', glb: 'toshinori-yagi-armored-all-might', thumb: 'toshinori-yagi-armored-all-might.png', title: 'Armored All Might' },
   { id: 'best-jeanist', dir: 'characters/best-jeanist', glb: 'best-jeanist', thumb: 'best-jeanist.png', title: 'Best Jeanist' },
   { id: 'camie-utsushimi', dir: 'characters/camie-utsushimi', glb: 'camie-utsushimi-illus-o-camie', thumb: 'camie-utsushimi-illus-o-camie.png', title: 'Camie Utsushimi' },

@@ -26,13 +26,19 @@ export function initReactions(meta) {
 
 function buildStage(container, meta, keys) {
   const els = {};
+  const isMobileStage = container.classList.contains('inline-stage');
 
   for (const key of keys) {
     if (meta.hasClips && meta.clips?.[key]) {
       const v = document.createElement('video');
       v.muted = true;
+      v.defaultMuted = true;
       v.playsInline = true;
-      v.preload = 'none';
+      v.setAttribute('muted', '');
+      v.setAttribute('playsinline', '');
+      // The first inline clip appears immediately after the long mobile hero.
+      // Fetch it early so it is ready before its ScrollTrigger enters view.
+      v.preload = isMobileStage && key === ORDER[0] ? 'auto' : 'none';
       v.poster = meta.posters[PREV[key]];
       v.src = meta.clips[key].src;
       els[key] = v;
@@ -57,8 +63,9 @@ function buildStage(container, meta, keys) {
     for (const other of Object.values(els)) other.classList.toggle('active', other === el);
     // Warm up the next section's clip one section ahead (spec §3.3).
     const next = els[ORDER[ORDER.indexOf(key) + 1]];
-    if (next?.tagName === 'VIDEO' && next.preload === 'none') next.preload = 'auto';
+    warmVideo(next);
     if (el.tagName !== 'VIDEO') return;
+    warmVideo(el);
     for (const other of Object.values(els)) if (other !== el && other.tagName === 'VIDEO') other.pause();
     if (!container.offsetParent) return;             // stage hidden by current breakpoint
     if (mode === 'play') {
@@ -70,6 +77,12 @@ function buildStage(container, meta, keys) {
   }
 
   return { show };
+}
+
+function warmVideo(video) {
+  if (video?.tagName !== 'VIDEO' || video.preload !== 'none') return;
+  video.preload = 'auto';
+  video.load();
 }
 
 function seekToEnd(video) {

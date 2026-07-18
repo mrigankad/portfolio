@@ -7,11 +7,11 @@ const FRAMES = 'public/assets/frames';
 const HERO_DIR = join(FRAMES, 'hero');
 const CLIPS = 'public/assets/clips';
 const HERO_COUNT = 80;
-const OUT_W = 1920, OUT_H = 1080;   // full source resolution — anything less shows soft on desktop
+const OUT_W = 1920, OUT_H = 1080;   // Full source resolution; anything less looks soft on desktop.
 const WEBP_QUALITY = '80';
 const REACTIONS = ['c2', 'c3', 'c4', 'c5'];
 
-// Paths under public/ are served from the web root — strip the prefix for URLs in meta.json.
+// Paths under public/ are served from the web root. Strip the prefix for URLs in meta.json.
 const webPath = (p) => String(p).replaceAll('\\', '/').replace(/^public\//, '');
 
 function requireFfmpeg() {
@@ -37,14 +37,14 @@ function probeDuration(file) {
     '-of', 'default=nw=1:nk=1', file]).toString().trim());
 }
 
-// Average color of an 8x8 patch at (x, y) — crop accepts ffmpeg expressions.
+// Average color of an 8x8 patch at (x, y). Crop accepts ffmpeg expressions.
 function sampleHex(image, x, y) {
   const raw = execFileSync('ffmpeg', ['-loglevel', 'error', '-i', image,
     '-vf', `crop=8:8:${x}:${y}`, '-frames:v', '1', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-']);
   return avgHex(raw);
 }
 // Edge of the backdrop vignette (page base color) and its lit top-center
-// (page gradient center) — both needed for the page to blend with the clips.
+// (page gradient center). Both are needed for the page to blend with the clips.
 const cornerHex = (image) => sampleHex(image, 4, 4);
 const centerTopHex = (image) => sampleHex(image, 'iw/2-4', 40);
 
@@ -102,7 +102,7 @@ function placeholders() {
 function build() {
   for (const k of ['c1', ...REACTIONS]) {
     if (!existsSync(join(CLIPS, `${k}.mp4`))) {
-      console.error(`Missing ${join(CLIPS, `${k}.mp4`)} — download it from Flow first.`);
+      console.error(`Missing ${join(CLIPS, `${k}.mp4`)}. Download it from Flow first.`);
       process.exit(1);
     }
   }
@@ -124,7 +124,7 @@ function build() {
   const clips = {};
   for (const k of REACTIONS) {
     const out = join(FRAMES, `${k}.web.mp4`);
-    // Keep full 1920px resolution — the stage crops to a 3:4 window, so any
+    // Keep the full 1920px resolution. The stage crops to a 3:4 window, so any
     // downscale here shows as blur once object-fit: cover zooms back in.
     ff(['-i', join(CLIPS, `${k}.mp4`), '-an', '-c:v', 'libx264', '-crf', '20',
       '-preset', 'slow', '-pix_fmt', 'yuv420p',
@@ -132,7 +132,7 @@ function build() {
     clips[k] = { src: webPath(out), duration: Math.round(probeDuration(out) * 100) / 100 };
   }
 
-  // Sample from the PNG poster (same background as every frame) — ffmpeg's
+  // Sample from the PNG poster, which has the same background as every frame. ffmpeg's
   // webp decoder can't be trusted with libwebp output.
   const poster = join(FRAMES, 'poster-c1.png');
   writeMeta({ bgHex: cornerHex(poster), bgLightHex: centerTopHex(poster), hasClips: true, clips });

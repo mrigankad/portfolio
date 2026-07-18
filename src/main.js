@@ -1,7 +1,6 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
-import './style.css';
 import { initHero } from './hero.js';
 import { initReactions } from './reactions.js';
 import { initModelGallery } from './models.js';
@@ -9,16 +8,53 @@ import { initModelGallery } from './models.js';
 gsap.registerPlugin(ScrollTrigger);
 
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const loaderProgress = document.getElementById('loader-progress');
+const loaderCount = document.getElementById('loader-count');
+const loaderStatus = document.getElementById('loader-status');
+let loaderPercent = 6;
+let loaderFinished = false;
+
+function updateLoader(percent, status) {
+  loaderPercent = Math.max(loaderPercent, Math.min(percent, 100));
+  if (loaderProgress) loaderProgress.style.transform = `scaleX(${loaderPercent / 100})`;
+  if (loaderCount) loaderCount.textContent = `${String(Math.round(loaderPercent)).padStart(2, '0')}%`;
+  if (status && loaderStatus) loaderStatus.textContent = status;
+}
+
+function finishLoader() {
+  if (loaderFinished) return;
+  loaderFinished = true;
+  clearInterval(loaderTick);
+  clearTimeout(loaderFailsafe);
+  updateLoader(100, 'Welcome');
+  document.body.classList.add('loader-complete');
+  setTimeout(() => document.body.classList.add('is-ready'), reduced ? 0 : 240);
+}
+
+updateLoader(loaderPercent);
+const loaderTick = setInterval(() => {
+  const step = Math.max(1, Math.ceil((88 - loaderPercent) * 0.08));
+  updateLoader(Math.min(88, loaderPercent + step));
+}, 120);
+const loaderFailsafe = setTimeout(finishLoader, 6000);
+
+const siteNav = document.querySelector('.site-nav');
+function syncNavSurface() {
+  siteNav?.classList.toggle('is-scrolled', scrollY > 32);
+}
+syncNavSurface();
+addEventListener('scroll', syncNavSurface, { passive: true });
 
 function staticMode(meta) {
-  document.body.classList.add('is-static', 'is-ready');
+  document.body.classList.add('is-static');
   const poster = document.getElementById('hero-poster');
   if (meta?.posters?.c1) poster.src = meta.posters.c1;
+  finishLoader();
 }
 
 function reveals() {
   // On refresh the browser restores the old scroll position (and fragment
-  // links land mid-page), so anything already on screen must never be hidden —
+  // links land mid-page), so anything already on screen must never be hidden.
   // only animate elements still below the fold.
   document.querySelectorAll('[data-reveal]').forEach((el) => {
     if (el.getBoundingClientRect().top < innerHeight * 0.92) return;
@@ -40,7 +76,8 @@ async function boot() {
 
   if (meta?.bgHex) document.documentElement.style.setProperty('--bg', meta.bgHex);
   if (meta?.bgLightHex) document.documentElement.style.setProperty('--bg-light', meta.bgLightHex);
-  initModelGallery(); // plain DOM — works in static mode too
+  updateLoader(38, 'Preparing the canvas');
+  initModelGallery(); // Plain DOM, so it works in static mode too.
   if (!meta || reduced || location.search.includes('nofx')) {
     staticMode(meta);
     return;
@@ -63,12 +100,13 @@ async function boot() {
 
   const hero = initHero(meta);
   initReactions(meta);
+  updateLoader(68, 'Composing the scene');
   // One frame later so the browser's scroll restoration / fragment jump has
   // happened before we decide what is "already on screen".
   requestAnimationFrame(() => reveals());
-  hero.ready.then(() => document.body.classList.add('is-ready'));
-  // Never trap anyone on the loader — reveal regardless after 6s.
-  setTimeout(() => document.body.classList.add('is-ready'), 6000);
+  hero.ready.then(finishLoader);
+  // Never trap anyone on the loader. Reveal regardless after 6s.
+  setTimeout(finishLoader, 6000);
 }
 
 boot();
