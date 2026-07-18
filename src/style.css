@@ -150,6 +150,38 @@
   .thumb-c { background: linear-gradient(135deg, #5a5f9e, #a3a8de); }
   .thumb-d { background: linear-gradient(135deg, #8a6f4d, #c9b088); }
 
+  /* ---------- 3D model gallery ---------- */
+  .model-card {
+    display: flex; flex-direction: column;
+    border: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
+    border-radius: 16px; background: var(--color-card);
+    overflow: hidden; padding: 0; cursor: pointer; text-align: left;
+    font: inherit; color: inherit;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .model-card:hover { transform: translateY(-4px); box-shadow: 0 16px 32px -16px rgba(34, 29, 21, 0.3); }
+  .model-card img { aspect-ratio: 1; width: 100%; object-fit: cover; }
+  .model-card span { padding: 0.55rem 0.8rem; font-size: 0.88rem; font-weight: 500; }
+
+  #model-dialog {
+    width: min(92vw, 900px); border: none; border-radius: 20px;
+    background: var(--color-card); color: var(--color-ink);
+    padding: 1rem; margin: auto; overscroll-behavior: contain;
+  }
+  #model-dialog::backdrop { background: rgba(34, 29, 21, 0.45); backdrop-filter: blur(4px); }
+  .mv-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; }
+  .mv-close {
+    display: grid; place-items: center; width: 2.25rem; height: 2.25rem;
+    border: 1px solid color-mix(in srgb, var(--color-ink) 12%, transparent);
+    border-radius: 999px; background: transparent; color: inherit; cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .mv-close:hover { background: var(--color-teal); color: #fff; }
+  .mv-holder { display: grid; place-items: center; min-height: min(65vh, 560px); }
+  .mv-holder model-viewer { width: 100%; height: min(65vh, 560px); background: var(--bg); border-radius: 14px; }
+  .mv-loading { color: var(--color-muted); }
+  body:has(#model-dialog[open]) { overflow: hidden; }
+
   /* ---------- static + not-ready modes ---------- */
   body.is-static #canvas-wrap, body.is-static .scroll-cue { display: none; }
   body.is-static #hero { height: 100vh; }
@@ -180,7 +212,7 @@
 
 @keyframes cue { 50% { transform: scaleY(0.35); transform-origin: top; } }
 
-a:focus-visible {
+a:focus-visible, button:focus-visible {
   outline: 3px solid var(--color-teal);
   outline-offset: 3px;
   border-radius: 6px;

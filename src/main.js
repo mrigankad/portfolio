@@ -4,6 +4,7 @@ import Lenis from 'lenis';
 import './style.css';
 import { initHero } from './hero.js';
 import { initReactions } from './reactions.js';
+import { initModelGallery } from './models.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -33,6 +34,7 @@ async function boot() {
 
   if (meta?.bgHex) document.documentElement.style.setProperty('--bg', meta.bgHex);
   if (meta?.bgLightHex) document.documentElement.style.setProperty('--bg-light', meta.bgLightHex);
+  initModelGallery(); // plain DOM — works in static mode too
   if (!meta || reduced) {
     staticMode(meta);
     return;
