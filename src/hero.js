@@ -36,7 +36,7 @@ function initMobileHero(wrap, video) {
   }
   video.play().catch(() => { /* loadeddata retries playback. */ });
 
-  gsap.to(wrap, {
+  gsap.fromTo(wrap, { opacity: 1 }, {
     opacity: 0, ease: 'none',
     scrollTrigger: {
       trigger: '#hero', start: '82% top', end: '98% top', scrub: true,
