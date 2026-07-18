@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mriganka — UI/UX Designer</title>
+  <meta name="description" content="Portfolio of Mriganka, UI/UX designer.">
+  <link rel="icon" href="assets/character.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-nav">
+    <a class="logo" href="#hero">MK<span class="logo-dot">.</span></a>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Work</a>
+      <a href="#skills">Skills</a>
+      <a class="nav-cta" href="#contact">Say hi</a>
+    </nav>
+  </header>
+
+  <section id="hero" aria-label="Intro">
+    <div id="canvas-wrap" aria-hidden="true">
+      <canvas id="hero-canvas"></canvas>
+    </div>
+    <img id="hero-poster" src="assets/character.png" alt="3D cartoon character of Mriganka">
+    <div class="hero-sticky">
+      <div class="hero-title">
+        <p class="hero-kicker">Hey, I'm</p>
+        <h1>Mriganka</h1>
+        <p class="hero-sub">UI/UX Designer — I design friendly, useful products.</p>
+      </div>
+      <div class="scroll-cue"><span></span>scroll</div>
+    </div>
+  </section>
+
+  <main class="page">
+    <div class="char-col"><div id="stage" aria-hidden="true"></div></div>
+
+    <div class="content-col">
+      <section id="about" data-section="c2">
+        <div class="inline-stage" data-clip="c2" aria-hidden="true"></div>
+        <h2 data-reveal>About me</h2>
+        <p class="lead" data-reveal>I'm a UI/UX designer who loves turning fuzzy problems
+        into clear, playful interfaces. Placeholder bio — swap in your own story here.</p>
+        <ul class="facts" data-reveal>
+          <li><strong>3+ yrs</strong> designing products</li>
+          <li><strong>10+</strong> shipped projects</li>
+          <li><strong>∞</strong> Figma frames</li>
+        </ul>
+      </section>
+
+      <section id="projects" data-section="c3">
+        <div class="inline-stage" data-clip="c3" aria-hidden="true"></div>
+        <h2 data-reveal>Selected work</h2>
+        <div class="cards">
+          <a class="card" href="#" data-reveal>
+            <div class="thumb thumb-a">01</div>
+            <h3>Project One</h3>
+            <p>Placeholder case study — mobile app redesign.</p>
+          </a>
+          <a class="card" href="#" data-reveal>
+            <div class="thumb thumb-b">02</div>
+            <h3>Project Two</h3>
+            <p>Placeholder case study — SaaS dashboard.</p>
+          </a>
+          <a class="card" href="#" data-reveal>
+            <div class="thumb thumb-c">03</div>
+            <h3>Project Three</h3>
+            <p>Placeholder case study — design system.</p>
+          </a>
+        </div>
+      </section>
+
+      <section id="skills" data-section="c4">
+        <div class="inline-stage" data-clip="c4" aria-hidden="true"></div>
+        <h2 data-reveal>Skills &amp; tools</h2>
+        <ul class="chips" data-reveal>
+          <li>UX research</li><li>Wireframing</li><li>Prototyping</li>
+          <li>Design systems</li><li>Figma</li><li>Illustration</li>
+          <li>Motion</li><li>HTML/CSS</li>
+        </ul>
+      </section>
+
+      <section id="contact" data-section="c5">
+        <div class="inline-stage" data-clip="c5" aria-hidden="true"></div>
+        <h2 data-reveal>Let's make something</h2>
+        <p class="lead" data-reveal>Have a project in mind, or just want to say hi?</p>
+        <a class="cta" data-reveal href="mailto:mriganka.uiux@gmail.com">mriganka.uiux@gmail.com</a>
+        <div class="socials" data-reveal>
+          <a href="#">Dribbble</a><a href="#">Behance</a><a href="#">LinkedIn</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer><p>© 2026 Mriganka · built with an AI-generated stunt double</p></footer>
+
+  <script src="js/vendor/gsap.min.js"></script>
+  <script src="js/vendor/ScrollTrigger.min.js"></script>
+  <script src="js/vendor/lenis.min.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
