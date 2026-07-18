@@ -17,12 +17,18 @@ function staticMode(meta) {
 }
 
 function reveals() {
+  // On refresh the browser restores the old scroll position (and fragment
+  // links land mid-page), so anything already on screen must never be hidden —
+  // only animate elements still below the fold.
   document.querySelectorAll('[data-reveal]').forEach((el) => {
+    if (el.getBoundingClientRect().top < innerHeight * 0.92) return;
     gsap.from(el, {
       opacity: 0, y: 26, duration: 0.7, ease: 'power2.out',
-      scrollTrigger: { trigger: el, start: 'top 85%' },
+      scrollTrigger: { trigger: el, start: 'top 85%', once: true },
     });
   });
+  // Re-measure trigger positions once every asset has loaded and laid out.
+  addEventListener('load', () => ScrollTrigger.refresh(), { once: true });
 }
 
 async function boot() {
@@ -35,7 +41,7 @@ async function boot() {
   if (meta?.bgHex) document.documentElement.style.setProperty('--bg', meta.bgHex);
   if (meta?.bgLightHex) document.documentElement.style.setProperty('--bg-light', meta.bgLightHex);
   initModelGallery(); // plain DOM — works in static mode too
-  if (!meta || reduced) {
+  if (!meta || reduced || location.search.includes('nofx')) {
     staticMode(meta);
     return;
   }
@@ -57,7 +63,9 @@ async function boot() {
 
   const hero = initHero(meta);
   initReactions(meta);
-  reveals();
+  // One frame later so the browser's scroll restoration / fragment jump has
+  // happened before we decide what is "already on screen".
+  requestAnimationFrame(() => reveals());
   hero.ready.then(() => document.body.classList.add('is-ready'));
   // Never trap anyone on the loader — reveal regardless after 6s.
   setTimeout(() => document.body.classList.add('is-ready'), 6000);
