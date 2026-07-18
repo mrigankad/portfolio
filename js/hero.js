@@ -105,7 +105,6 @@ export function initHero(meta) {
           w: f.w + (t.width - f.w) * p,
           h: f.h + (t.height - f.h) * p,
         });
-        wrap.style.borderRadius = `${24 * p}px`;
         wrap.style.overflow = 'hidden';
         // .page is z-index 3; lift the canvas above it while it morphs into the column.
         wrap.style.zIndex = p > 0 ? '4' : '';
