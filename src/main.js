@@ -59,6 +59,8 @@ async function boot() {
   initReactions(meta);
   reveals();
   hero.ready.then(() => document.body.classList.add('is-ready'));
+  // Never trap anyone on the loader — reveal regardless after 6s.
+  setTimeout(() => document.body.classList.add('is-ready'), 6000);
 }
 
 boot();

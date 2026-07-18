@@ -21,6 +21,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div id="loader" aria-hidden="true">
+    <p class="loader-mark font-display font-bold">MD<span class="text-teal">.</span></p>
+    <div class="loader-dots"><span></span><span></span><span></span></div>
+  </div>
   <a class="skip-link" href="#about">Skip to content</a>
   <header class="site-nav fixed inset-x-0 top-0 z-50 flex items-center justify-between py-4">
     <a class="font-display text-[1.35rem] font-bold" href="#hero">MD<span class="text-teal">.</span></a>
@@ -155,9 +159,9 @@
         a software 3D engine written from scratch in Go, merged fixes in three.js, Blender mecha models,
         and a growing library of hand-drawn Gundam artwork.</p>
         <ul class="mt-5 flex list-none flex-wrap gap-3 p-0" data-reveal>
-          <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/threedotjs" alt="" loading="lazy">three.js contributor</li>
-          <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/blender" alt="" loading="lazy">Blender</li>
-          <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/go" alt="" loading="lazy">Custom 3D engine in Go</li>
+          <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="/assets/icons/threedotjs.svg" alt="" loading="lazy">three.js contributor</li>
+          <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="/assets/icons/blender.svg" alt="" loading="lazy">Blender</li>
+          <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="/assets/icons/go.svg" alt="" loading="lazy">Custom 3D engine in Go</li>
         </ul>
         <div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
           <img class="aspect-square w-full rounded-2xl object-cover transition duration-300 hover:scale-[1.03]" src="/assets/art/art-01.webp" alt="Hand-drawn Gundam mecha artwork" loading="lazy" data-reveal>
@@ -218,24 +222,24 @@
           <div data-reveal>
             <h3 class="mb-3 text-[0.85rem] font-bold uppercase tracking-[0.08em] text-muted">Languages</h3>
             <ul class="flex list-none flex-wrap gap-3 p-0">
-              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/python" alt="" loading="lazy">Python</li>
-              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/typescript" alt="" loading="lazy">TypeScript</li>
-              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/javascript" alt="" loading="lazy">JavaScript</li>
-              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/go" alt="" loading="lazy">Go</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="/assets/icons/python.svg" alt="" loading="lazy">Python</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="/assets/icons/typescript.svg" alt="" loading="lazy">TypeScript</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="/assets/icons/javascript.svg" alt="" loading="lazy">JavaScript</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="/assets/icons/go.svg" alt="" loading="lazy">Go</li>
               <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">Java</li>
               <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">SQL &amp; DAX</li>
-              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/html5" alt="" loading="lazy">HTML / CSS</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="/assets/icons/html5.svg" alt="" loading="lazy">HTML / CSS</li>
             </ul>
           </div>
           <div data-reveal>
             <h3 class="mb-3 text-[0.85rem] font-bold uppercase tracking-[0.08em] text-muted">Frontend &amp; product</h3>
             <ul class="flex list-none flex-wrap gap-3 p-0">
-              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/react" alt="" loading="lazy">React</li>
-              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/nextdotjs" alt="" loading="lazy">Next.js</li>
-              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/vite" alt="" loading="lazy">Vite</li>
-              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/tailwindcss" alt="" loading="lazy">Tailwind CSS</li>
-              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/chakraui" alt="" loading="lazy">Chakra UI</li>
-              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/figma" alt="" loading="lazy">Figma</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="/assets/icons/react.svg" alt="" loading="lazy">React</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="/assets/icons/nextdotjs.svg" alt="" loading="lazy">Next.js</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="/assets/icons/vite.svg" alt="" loading="lazy">Vite</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="/assets/icons/tailwindcss.svg" alt="" loading="lazy">Tailwind CSS</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="/assets/icons/chakraui.svg" alt="" loading="lazy">Chakra UI</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="/assets/icons/figma.svg" alt="" loading="lazy">Figma</li>
               <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">Design systems</li>
               <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">Prototyping &amp; usability</li>
             </ul>
@@ -246,7 +250,7 @@
               <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">Multi-agent orchestration</li>
               <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">RAG</li>
               <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">Text-to-SQL</li>
-              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/googlegemini" alt="" loading="lazy">Gemini API</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="/assets/icons/googlegemini.svg" alt="" loading="lazy">Gemini API</li>
               <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">VLMs</li>
               <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">Groq</li>
             </ul>
@@ -254,10 +258,10 @@
           <div data-reveal>
             <h3 class="mb-3 text-[0.85rem] font-bold uppercase tracking-[0.08em] text-muted">Automation &amp; RPA</h3>
             <ul class="flex list-none flex-wrap gap-3 p-0">
-              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/appium" alt="" loading="lazy">Appium</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="/assets/icons/appium.svg" alt="" loading="lazy">Appium</li>
               <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">WinAppDriver</li>
               <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">Playwright</li>
-              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/n8n" alt="" loading="lazy">n8n</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="/assets/icons/n8n.svg" alt="" loading="lazy">n8n</li>
               <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">Java Access Bridge</li>
             </ul>
           </div>
@@ -266,18 +270,18 @@
             <ul class="flex list-none flex-wrap gap-3 p-0">
               <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">Power BI</li>
               <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">Tableau</li>
-              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/qlik" alt="" loading="lazy">Qlik Sense</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="/assets/icons/qlik.svg" alt="" loading="lazy">Qlik Sense</li>
               <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">IBM Cognos</li>
             </ul>
           </div>
           <div data-reveal>
             <h3 class="mb-3 text-[0.85rem] font-bold uppercase tracking-[0.08em] text-muted">Backend &amp; cloud</h3>
             <ul class="flex list-none flex-wrap gap-3 p-0">
-              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/fastapi" alt="" loading="lazy">FastAPI</li>
-              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/docker" alt="" loading="lazy">Docker</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="/assets/icons/fastapi.svg" alt="" loading="lazy">FastAPI</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="/assets/icons/docker.svg" alt="" loading="lazy">Docker</li>
               <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">AWS EC2 / S3</li>
-              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/datadog" alt="" loading="lazy">Datadog</li>
-              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="https://cdn.simpleicons.org/git" alt="" loading="lazy">Git</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="/assets/icons/datadog.svg" alt="" loading="lazy">Datadog</li>
+              <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium"><img class="size-4" src="/assets/icons/git.svg" alt="" loading="lazy">Git</li>
               <li class="flex items-center gap-2 rounded-full border border-ink/10 bg-card px-4 py-2 text-[0.9rem] font-medium">ServiceNow</li>
             </ul>
           </div>
@@ -310,7 +314,7 @@
     </div>
   </main>
 
-  <footer class="px-4 py-12 text-center text-sm text-muted"><p>© 2026 Mriganka Dey · built with an AI-generated stunt double</p></footer>
+  <footer class="px-4 py-12 text-center text-sm text-muted"><p>© 2026 Mriganka Dey</p></footer>
 
   <script type="module" src="/src/main.js"></script>
 </body>
