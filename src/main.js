@@ -43,6 +43,16 @@ async function boot() {
   gsap.ticker.add((t) => lenis.raf(t * 1000));
   gsap.ticker.lagSmoothing(0);
 
+  // Anchor navigation glides with Lenis instead of jumping.
+  document.querySelectorAll('a[href^="#"]').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      lenis.scrollTo(target, { offset: -80 });
+    });
+  });
+
   const hero = initHero(meta);
   initReactions(meta);
   reveals();

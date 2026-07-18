@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#dac7a4">
   <title>Mriganka Dey — Product Engineer</title>
   <meta name="description" content="Portfolio of Mriganka Dey — product engineer who designs interfaces and builds the systems behind them.">
   <meta property="og:title" content="Mriganka Dey — Product Engineer">
@@ -20,7 +21,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header class="site-nav fixed inset-x-0 top-0 z-50 flex items-center justify-between px-[clamp(1.2rem,4vw,3rem)] py-4">
+  <a class="skip-link" href="#about">Skip to content</a>
+  <header class="site-nav fixed inset-x-0 top-0 z-50 flex items-center justify-between py-4">
     <a class="font-display text-[1.35rem] font-bold" href="#hero">MD<span class="text-teal">.</span></a>
     <nav class="flex items-center gap-6 text-[0.95rem] font-medium">
       <a class="transition hover:text-teal-deep" href="#about">About</a>
@@ -55,7 +57,7 @@
         <p class="max-w-[54ch] text-[1.12rem] text-muted" data-reveal>I build the automation layer that helps businesses get paid faster.
         I started in UX — Google and Microsoft certified — then moved into engineering the systems behind the
         interfaces: full-stack products, desktop and workflow automation, analytics tooling, and multi-agent AI.
-        These days I'm helping healthcare teams build the "touchless" revenue cycle.</p>
+        These days I'm helping healthcare teams build the &ldquo;touchless&rdquo; revenue cycle.</p>
         <ul class="mt-8 flex list-none flex-wrap gap-9 p-0" data-reveal>
           <li><strong class="block font-display text-[1.5rem] font-bold text-teal-deep">Design + code</strong> UX certified, ships full-stack</li>
           <li><strong class="block font-display text-[1.5rem] font-bold text-teal-deep">3 OSS repos</strong> three.js · vanna · pentagi</li>
@@ -65,29 +67,35 @@
 
       <section id="experience" class="flex min-h-[80vh] flex-col justify-center py-[12vh]">
         <h2 class="mb-5 font-display text-[clamp(2rem,4.6vw,3.2rem)] font-bold tracking-[-0.01em]" data-reveal>Where I've worked</h2>
-        <ol class="mt-4 list-none space-y-10 border-l-2 border-ink/10 p-0 pl-8">
-          <li class="relative" data-reveal>
-            <span class="absolute -left-[41px] top-1.5 size-4 rounded-full border-4 border-[var(--bg)] bg-teal"></span>
-            <p class="text-[0.85rem] font-medium uppercase tracking-[0.08em] text-muted">Jun 2026 — present</p>
-            <h3 class="font-display text-[1.2rem] font-bold">Freelance Product Engineer · Independent</h3>
-            <p class="max-w-[54ch] text-[0.98rem] text-muted">Making healthcare billing agentic — designing autonomous, exception-driven
-            revenue-cycle workflows, currently transforming Medisoft LLP's billing cycle into an agentic pipeline.</p>
-          </li>
-          <li class="relative" data-reveal>
-            <span class="absolute -left-[41px] top-1.5 size-4 rounded-full border-4 border-[var(--bg)] bg-teal/70"></span>
-            <p class="text-[0.85rem] font-medium uppercase tracking-[0.08em] text-muted">Oct 2025 — Jun 2026</p>
-            <h3 class="font-display text-[1.2rem] font-bold">Product Engineer · Joules To Watts, Bengaluru</h3>
-            <p class="max-w-[54ch] text-[0.98rem] text-muted">Built the J2W Invoice Engine (multi-tenant SaaS billing) and the Talent Sphere
-            frontend; automated GE Healthcare's CSCS clinical tool with desktop RPA.</p>
-          </li>
-          <li class="relative" data-reveal>
-            <span class="absolute -left-[41px] top-1.5 size-4 rounded-full border-4 border-[var(--bg)] bg-teal/40"></span>
-            <p class="text-[0.85rem] font-medium uppercase tracking-[0.08em] text-muted">Jan 2025 — Jul 2025</p>
-            <h3 class="font-display text-[1.2rem] font-bold">Product Engineer Intern · Mahindra Teqo, Thane</h3>
-            <p class="max-w-[54ch] text-[0.98rem] text-muted">Real-time solar performance analytics dashboards, PV Lab Scheduler improvements,
-            and the TeqoNoc V2 UI redesign.</p>
-          </li>
-        </ol>
+        <div class="mt-4 space-y-4">
+          <div class="flex items-start gap-4 rounded-2xl border border-ink/10 bg-card p-5" data-reveal>
+            <span class="grid size-12 shrink-0 place-items-center rounded-xl border border-ink/10 bg-white font-display font-bold text-teal-deep">MD<span class="text-teal">.</span></span>
+            <div>
+              <p class="text-[0.8rem] font-medium uppercase tracking-[0.08em] text-muted">Jun 2026 — present</p>
+              <h3 class="font-display text-[1.15rem] font-bold">Freelance Product Engineer · Independent</h3>
+              <p class="max-w-[54ch] text-[0.95rem] text-muted">Making healthcare billing agentic — autonomous, exception-driven
+              revenue-cycle workflows, currently transforming Medisoft LLP's billing cycle into an agentic pipeline.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 rounded-2xl border border-ink/10 bg-card p-5" data-reveal>
+            <span class="grid size-12 shrink-0 place-items-center rounded-xl border border-ink/10 bg-white p-1.5"><img class="h-auto w-full object-contain" src="/assets/logos/j2w.png" alt="Joules to Watts logo" width="145" height="69" loading="lazy"></span>
+            <div>
+              <p class="text-[0.8rem] font-medium uppercase tracking-[0.08em] text-muted">Oct 2025 — Jun 2026</p>
+              <h3 class="font-display text-[1.15rem] font-bold">Product Engineer · Joules To Watts, Bengaluru</h3>
+              <p class="max-w-[54ch] text-[0.95rem] text-muted">Built the J2W Invoice Engine (multi-tenant SaaS billing) and the Talent Sphere
+              frontend; automated GE Healthcare's CSCS clinical tool with desktop RPA.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 rounded-2xl border border-ink/10 bg-card p-5" data-reveal>
+            <span class="grid size-12 shrink-0 place-items-center rounded-xl border border-ink/10 bg-white p-2"><img class="size-8 object-contain" src="/assets/logos/mahindra-teqo.png" alt="Mahindra Teqo logo" width="40" height="40" loading="lazy"></span>
+            <div>
+              <p class="text-[0.8rem] font-medium uppercase tracking-[0.08em] text-muted">Jan 2025 — Jul 2025</p>
+              <h3 class="font-display text-[1.15rem] font-bold">Product Engineer Intern · Mahindra Teqo, Thane</h3>
+              <p class="max-w-[54ch] text-[0.95rem] text-muted">Real-time solar performance analytics dashboards, PV Lab Scheduler improvements,
+              and the TeqoNoc V2 UI redesign.</p>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section id="projects" data-section="c3" class="flex min-h-[92vh] flex-col justify-center py-[12vh]">

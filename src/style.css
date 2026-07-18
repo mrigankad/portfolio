@@ -19,6 +19,7 @@
 
 @layer base {
   html {
+    color-scheme: light;
     /* Slim scrollbar in the page's own palette (Firefox + modern Chromium). */
     scrollbar-width: thin;
     scrollbar-color: color-mix(in srgb, var(--color-ink) 35%, var(--bg)) transparent;
@@ -40,6 +41,9 @@
     line-height: 1.6;
     overflow-x: clip;
   }
+  a { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+  section[id] { scroll-margin-top: 5.5rem; }
+  h1, h2, h3 { text-wrap: balance; }
   /* Soft studio vignette derived from the sampled clip background, so the page
      reads as the same lit backdrop the character stands in. A fixed pseudo-
      element instead of background-attachment: fixed, which iOS ignores. */
@@ -55,6 +59,20 @@
 }
 
 @layer components {
+  .skip-link {
+    position: fixed; top: 0.75rem; left: 0.75rem; z-index: 100;
+    transform: translateY(-250%);
+    background: var(--color-ink); color: #fff;
+    padding: 0.5rem 1.1rem; border-radius: 999px; font-weight: 500;
+    transition: transform 0.2s ease;
+  }
+  .skip-link:focus-visible { transform: none; }
+
+  .site-nav {
+    padding-left: max(clamp(1.2rem, 4vw, 3rem), env(safe-area-inset-left));
+    padding-right: max(clamp(1.2rem, 4vw, 3rem), env(safe-area-inset-right));
+  }
+
   /* ---------- hero ---------- */
   #hero { height: 300vh; position: relative; }
   #canvas-wrap {
@@ -73,7 +91,8 @@
   #hero-canvas { width: 100%; height: 100%; }
   #hero-poster {
     display: none; position: absolute; top: 12vh; left: 50%;
-    transform: translateX(-50%); height: 76vh; width: auto; object-fit: contain;
+    transform: translateX(-50%); height: 76vh; width: auto; max-width: 94vw;
+    object-fit: contain;
   }
   .hero-sticky {
     position: sticky; top: 0; height: 100vh; z-index: 2;
