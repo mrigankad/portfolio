@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { frameIndexForProgress, coverRect } from '../js/scrub-math.js';
+import { frameIndexForProgress, coverRect } from '../src/scrub-math.js';
 
 test('frameIndexForProgress maps and clamps', () => {
   assert.equal(frameIndexForProgress(0, 80), 0);

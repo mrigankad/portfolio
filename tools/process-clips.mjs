@@ -3,12 +3,16 @@ import { existsSync, mkdirSync, rmSync, writeFileSync, readdirSync } from 'node:
 import { join, dirname, basename, extname } from 'node:path';
 import { placeholderCropSpec, avgHex, frameName } from './clip-utils.mjs';
 
-const FRAMES = 'assets/frames';
+const FRAMES = 'public/assets/frames';
 const HERO_DIR = join(FRAMES, 'hero');
-const CLIPS = 'assets/clips';
+const CLIPS = 'public/assets/clips';
 const HERO_COUNT = 80;
-const OUT_W = 1600, OUT_H = 900;
+const OUT_W = 1920, OUT_H = 1080;   // full source resolution — anything less shows soft on desktop
+const WEBP_QUALITY = '80';
 const REACTIONS = ['c2', 'c3', 'c4', 'c5'];
+
+// Paths under public/ are served from the web root — strip the prefix for URLs in meta.json.
+const webPath = (p) => String(p).replaceAll('\\', '/').replace(/^public\//, '');
 
 function requireFfmpeg() {
   for (const bin of ['ffmpeg', 'ffprobe']) {
@@ -49,11 +53,11 @@ function lastframe(clip, outPath) {
 
 function writeMeta(extra) {
   const posters = {};
-  for (const k of ['c1', ...REACTIONS]) posters[k] = `${FRAMES}/poster-${k}.png`;
+  for (const k of ['c1', ...REACTIONS]) posters[k] = webPath(`${FRAMES}/poster-${k}.png`);
   const count = readdirSync(HERO_DIR).filter((f) => f.endsWith('.webp')).length;
   const meta = {
     bgHex: extra.bgHex,
-    hero: { count, dir: `${FRAMES}/hero`, width: OUT_W, height: OUT_H },
+    hero: { count, dir: webPath(`${FRAMES}/hero`), width: OUT_W, height: OUT_H },
     hasClips: extra.hasClips,
     posters,
     clips: extra.clips,
@@ -65,7 +69,7 @@ function writeMeta(extra) {
 function placeholders() {
   rmSync(FRAMES, { recursive: true, force: true });
   mkdirSync(HERO_DIR, { recursive: true });
-  const srcPng = 'assets/character.png';
+  const srcPng = 'public/assets/character.png';
   const { w: srcW, h: srcH } = probeSize(srcPng);
   const bgHex = cornerHex(srcPng);
 
@@ -81,7 +85,7 @@ function placeholders() {
   for (let i = 0; i < HERO_COUNT; i++) {
     const { w, h, x, y } = placeholderCropSpec(i, HERO_COUNT, padW, srcH, faceX, faceY);
     ff(['-i', padded, '-vf', `crop=${w}:${h}:${x}:${y},scale=${OUT_W}:${OUT_H}:flags=lanczos`,
-      '-quality', '72', join(HERO_DIR, frameName(i))]);
+      '-quality', WEBP_QUALITY, join(HERO_DIR, frameName(i))]);
   }
   for (const k of ['c1', ...REACTIONS]) {
     ff(['-i', padded, '-vf', `scale=960:-2`, join(FRAMES, `poster-${k}.png`)]);
@@ -104,7 +108,7 @@ function build() {
   // -f image2 + -c:v libwebp: without these, ffmpeg 8 picks the animated-webp
   // encoder and packs every frame into a single file.
   ff(['-i', join(CLIPS, 'c1.mp4'), '-vf', `fps=10,scale=${OUT_W}:${OUT_H}:flags=lanczos`,
-    '-f', 'image2', '-c:v', 'libwebp', '-quality', '72', join(HERO_DIR, 'hero-%04d.webp')]);
+    '-f', 'image2', '-c:v', 'libwebp', '-quality', WEBP_QUALITY, join(HERO_DIR, 'hero-%04d.webp')]);
 
   // Posters: the LAST frame of each clip (= that section's resting pose).
   for (const k of ['c1', ...REACTIONS]) {
@@ -115,10 +119,12 @@ function build() {
   const clips = {};
   for (const k of REACTIONS) {
     const out = join(FRAMES, `${k}.web.mp4`);
-    ff(['-i', join(CLIPS, `${k}.mp4`), '-an', '-c:v', 'libx264', '-crf', '22',
-      '-preset', 'slow', '-vf', 'scale=1280:-2', '-pix_fmt', 'yuv420p',
+    // Keep full 1920px resolution — the stage crops to a 3:4 window, so any
+    // downscale here shows as blur once object-fit: cover zooms back in.
+    ff(['-i', join(CLIPS, `${k}.mp4`), '-an', '-c:v', 'libx264', '-crf', '20',
+      '-preset', 'slow', '-pix_fmt', 'yuv420p',
       '-movflags', '+faststart', out]);
-    clips[k] = { src: out.replaceAll('\\', '/'), duration: Math.round(probeDuration(out) * 100) / 100 };
+    clips[k] = { src: webPath(out), duration: Math.round(probeDuration(out) * 100) / 100 };
   }
 
   // Sample from the PNG poster (same background as every frame) — ffmpeg's

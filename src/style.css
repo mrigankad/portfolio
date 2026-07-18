@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #221d15;
+  --color-muted: #5b5348; /* >=4.5:1 on the sampled tan background of the Veo renders */
+  --color-teal: #2a7d8c;
+  --color-teal-deep: #1d5a66;
+  --color-card: #fffdf8;
+  --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-body: "Manrope", system-ui, "Segoe UI", sans-serif;
+}
+
+:root {
+  --bg: #dac7a4; /* overwritten at runtime from meta.json bgHex */
+  --stage-w: min(38vw, 520px);
+  --stage-top: calc(50vh - (var(--stage-w) * 4 / 3) / 2);
+}
+
+@layer base {
+  body {
+    /* Soft studio vignette derived from the sampled clip background, so the
+       page reads as the same lit backdrop the character stands in. */
+    background-color: var(--bg);
+    background-image: radial-gradient(130% 100% at 50% 12%,
+      color-mix(in srgb, var(--bg) 84%, #fff8ec) 0%, var(--bg) 62%);
+    background-attachment: fixed;
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: clip;
+  }
+}
+
+@layer components {
+  /* ---------- hero ---------- */
+  #hero { height: 300vh; position: relative; }
+  #canvas-wrap {
+    position: fixed; left: 0; top: 0; width: 100vw; height: 100vh;
+    z-index: 1; pointer-events: none; will-change: transform, width, height;
+    transition: opacity 0.4s ease;
+  }
+  #hero-canvas { width: 100%; height: 100%; }
+  #hero-poster {
+    display: none; position: absolute; top: 12vh; left: 50%;
+    transform: translateX(-50%); height: 76vh; width: auto; object-fit: contain;
+  }
+  .hero-sticky {
+    position: sticky; top: 0; height: 100vh; z-index: 2;
+    display: grid; place-items: end center; pointer-events: none;
+  }
+  .hero-title { opacity: 0; }
+  .scroll-cue {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-muted);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  }
+  .scroll-cue span {
+    width: 1px; height: 2.6rem; background: var(--color-ink); opacity: 0.4;
+    animation: cue 1.6s ease-in-out infinite;
+  }
+
+  /* ---------- page grid + stage ---------- */
+  .page {
+    position: relative; z-index: 3;
+    display: grid; grid-template-columns: var(--stage-w) 1fr;
+    gap: clamp(1.5rem, 4vw, 4rem);
+    padding: 0 clamp(1.2rem, 4vw, 3rem);
+    max-width: 1440px; margin: 0 auto;
+  }
+  .char-col { position: relative; }
+  #stage {
+    position: sticky; top: var(--stage-top);
+    width: 100%; aspect-ratio: 3 / 4;
+    overflow: hidden;
+    /* Feather all four edges so the clip dissolves into the page backdrop. */
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent),
+      linear-gradient(to bottom, transparent, #000 9%, #000 91%, transparent);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent),
+      linear-gradient(to bottom, transparent, #000 9%, #000 91%, transparent);
+    mask-composite: intersect;
+  }
+  #stage img, #stage video {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; opacity: 0; transition: opacity 0.18s linear;
+  }
+  #stage .active { opacity: 1; }
+  .inline-stage { display: none; }
+
+  /* project thumbs */
+  .thumb {
+    aspect-ratio: 4 / 3; border-radius: 14px; margin-bottom: 0.9rem;
+    display: grid; place-items: center; color: rgba(255, 255, 255, 0.85);
+    font-family: var(--font-display); font-weight: 800; font-size: 1.6rem;
+  }
+  .thumb-a { background: linear-gradient(135deg, #2a7d8c, #7fc4c9); }
+  .thumb-b { background: linear-gradient(135deg, #f4a259, #f7cf8f); }
+  .thumb-c { background: linear-gradient(135deg, #5a5f9e, #a3a8de); }
+
+  /* ---------- static + not-ready modes ---------- */
+  body.is-static #canvas-wrap, body.is-static .scroll-cue { display: none; }
+  body.is-static #hero { height: 100vh; }
+  body.is-static #hero-poster { display: block; }
+  body.is-static .hero-title { opacity: 1; }
+  body:not(.is-ready) #canvas-wrap { opacity: 0; }
+
+  /* ---------- mobile (must stay in sync with the 820px matchMedia in JS) ---------- */
+  @media (max-width: 819px) {
+    .page { grid-template-columns: 1fr; }
+    .char-col { display: none; }
+    .inline-stage {
+      display: block; width: min(72vw, 300px); aspect-ratio: 3 / 4;
+      overflow: hidden; margin-bottom: 1.6rem; position: relative;
+      -webkit-mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent),
+        linear-gradient(to bottom, transparent, #000 9%, #000 91%, transparent);
+      -webkit-mask-composite: source-in;
+      mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent),
+        linear-gradient(to bottom, transparent, #000 9%, #000 91%, transparent);
+      mask-composite: intersect;
+    }
+    .inline-stage img, .inline-stage video {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    }
+    .site-nav nav a:not(.nav-cta) { display: none; }
+  }
+}
+
+@keyframes cue { 50% { transform: scaleY(0.35); transform-origin: top; } }
+
+a:focus-visible {
+  outline: 3px solid var(--color-teal);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cue span { animation: none; }
+}
