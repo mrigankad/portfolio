@@ -161,3 +161,9 @@ body:not(.is-ready) #canvas-wrap { opacity: 0; }
 @media (prefers-reduced-motion: reduce) {
   .scroll-cue span { animation: none; }
 }
+
+a:focus-visible, .card:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
