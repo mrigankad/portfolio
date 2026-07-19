@@ -1,4 +1,4 @@
-{
+﻿{
   "bgHex": "#dac7a4",
   "bgLightHex": "#eeddc1",
   "hero": {
@@ -9,11 +9,11 @@
   },
   "hasClips": true,
   "posters": {
-    "c1": "assets/frames/poster-c1.png",
-    "c2": "assets/frames/poster-c2.png",
-    "c3": "assets/frames/poster-c3.png",
-    "c4": "assets/frames/poster-c4.png",
-    "c5": "assets/frames/poster-c5.png"
+    "c1": "assets/frames/poster-c1.webp",
+    "c2": "assets/frames/poster-c2.webp",
+    "c3": "assets/frames/poster-c3.webp",
+    "c4": "assets/frames/poster-c4.webp",
+    "c5": "assets/frames/poster-c5.webp"
   },
   "clips": {
     "c2": {

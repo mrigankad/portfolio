@@ -19,9 +19,10 @@ All prompts live in the spec:
    master prompt, then the 5 pose-edit prompts (spec §2.1). Download all six.
 2. **Clips:** In Google Flow, "Frames to Video" (spec §2.2), use this order:
    - `c1`: first frame = Still 0 (close-up), last frame = Still 1 (master). 8 s.
-   - Download it to `public/assets/clips/c1.mp4`, then get the chaining frame:
+   - Download it to `source-clips/c1.mp4` (kept outside `public/` so the raw
+     downloads never ship in a deploy), then get the chaining frame:
 
-         node tools/process-clips.mjs lastframe public/assets/clips/c1.mp4
+         node tools/process-clips.mjs lastframe source-clips/c1.mp4
 
    - `c2`: first frame = `c1.last.png`, last frame = Still 2 (wave).
    - Repeat the `lastframe` step after each download; `c3` (point), `c4` (ta-da),

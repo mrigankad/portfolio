@@ -5,7 +5,8 @@ import { placeholderCropSpec, avgHex, frameName } from './clip-utils.mjs';
 
 const FRAMES = 'public/assets/frames';
 const HERO_DIR = join(FRAMES, 'hero');
-const CLIPS = 'public/assets/clips';
+// Source clips live outside public/ so the raw downloads never ship in a deploy.
+const CLIPS = 'source-clips';
 const HERO_COUNT = 80;
 const OUT_W = 1920, OUT_H = 1080;   // Full source resolution; anything less looks soft on desktop.
 const WEBP_QUALITY = '80';
@@ -57,7 +58,7 @@ function lastframe(clip, outPath) {
 
 function writeMeta(extra) {
   const posters = {};
-  for (const k of ['c1', ...REACTIONS]) posters[k] = webPath(`${FRAMES}/poster-${k}.png`);
+  for (const k of ['c1', ...REACTIONS]) posters[k] = webPath(`${FRAMES}/poster-${k}.webp`);
   const count = readdirSync(HERO_DIR).filter((f) => f.endsWith('.webp')).length;
   const meta = {
     bgHex: extra.bgHex,
@@ -93,7 +94,8 @@ function placeholders() {
       '-quality', WEBP_QUALITY, join(HERO_DIR, frameName(i))]);
   }
   for (const k of ['c1', ...REACTIONS]) {
-    ff(['-i', padded, '-vf', `scale=960:-2`, join(FRAMES, `poster-${k}.png`)]);
+    ff(['-i', padded, '-vf', `scale=960:-2`, '-c:v', 'libwebp', '-quality', WEBP_QUALITY,
+      join(FRAMES, `poster-${k}.webp`)]);
   }
   rmSync(padded);
   writeMeta({ bgHex, bgLightHex: bgHex, hasClips: false, clips: null });
@@ -116,8 +118,12 @@ function build() {
     '-f', 'image2', '-c:v', 'libwebp', '-quality', WEBP_QUALITY, join(HERO_DIR, 'hero-%04d.webp')]);
 
   // Posters: the LAST frame of each clip (= that section's resting pose).
+  // PNG first (needed for reliable color sampling), then a small WebP for the
+  // site — video poster attributes download eagerly, so size matters here.
   for (const k of ['c1', ...REACTIONS]) {
-    lastframe(join(CLIPS, `${k}.mp4`), join(FRAMES, `poster-${k}.png`));
+    const png = lastframe(join(CLIPS, `${k}.mp4`), join(FRAMES, `poster-${k}.png`));
+    ff(['-i', png, '-vf', 'scale=1280:-2', '-c:v', 'libwebp', '-quality', WEBP_QUALITY,
+      join(FRAMES, `poster-${k}.webp`)]);
   }
 
   // Web-optimized muted reaction clips.
@@ -135,7 +141,15 @@ function build() {
   // Sample from the PNG poster, which has the same background as every frame. ffmpeg's
   // webp decoder can't be trusted with libwebp output.
   const poster = join(FRAMES, 'poster-c1.png');
-  writeMeta({ bgHex: cornerHex(poster), bgLightHex: centerTopHex(poster), hasClips: true, clips });
+  const bgHex = cornerHex(poster), bgLightHex = centerTopHex(poster);
+
+  // Social-share image (1200x630) from the hero resting pose.
+  ff(['-i', poster, '-vf', 'scale=1200:675:flags=lanczos,crop=1200:630', '-q:v', '3',
+    'public/assets/og-image.jpg']);
+
+  // The PNGs were only needed for sampling/derivatives; the site uses the WebPs.
+  for (const k of ['c1', ...REACTIONS]) rmSync(join(FRAMES, `poster-${k}.png`));
+  writeMeta({ bgHex, bgLightHex, hasClips: true, clips });
 }
 
 requireFfmpeg();
