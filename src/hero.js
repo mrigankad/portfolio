@@ -2,10 +2,13 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { frameIndexForProgress, coverRect } from './scrub-math.js';
 
-function wireHeroChrome() {
+function wireHeroChrome(desktop) {
+  // The hero is 300vh on desktop but only 160vh on mobile (no scrub there), so
+  // the title reveal needs different percentages to land while it's on screen.
+  const [start, end] = desktop ? ['55% top', '78% top'] : ['20% top', '50% top'];
   gsap.fromTo('.hero-title', { opacity: 0, y: 28 }, {
     opacity: 1, y: 0, ease: 'none',
-    scrollTrigger: { trigger: '#hero', start: '55% top', end: '78% top', scrub: true },
+    scrollTrigger: { trigger: '#hero', start, end, scrub: true },
   });
 
   gsap.to('.scroll-cue', {
@@ -52,9 +55,14 @@ export function initHero(meta) {
   const wrap = document.getElementById('canvas-wrap');
   const canvas = document.getElementById('hero-canvas');
   const stage = document.getElementById('stage');
-  const desktop = matchMedia('(min-width: 820px)').matches;
+  const mq = matchMedia('(min-width: 820px)');
+  const desktop = mq.matches;
   const mobileVideo = document.getElementById('hero-mobile-video');
-  wireHeroChrome();
+  // The whole hero pipeline (canvas scrub vs. mobile video, stage morph) is
+  // built for one breakpoint; rebuilding in place is not worth the complexity,
+  // so a resize/rotation across 820px simply reloads with the right setup.
+  mq.addEventListener('change', () => location.reload());
+  wireHeroChrome(desktop);
   if (!desktop && mobileVideo) return initMobileHero(wrap, mobileVideo);
 
   const ctx = canvas.getContext('2d');

@@ -56,15 +56,77 @@ function reveals() {
   // On refresh the browser restores the old scroll position (and fragment
   // links land mid-page), so anything already on screen must never be hidden.
   // only animate elements still below the fold.
-  document.querySelectorAll('[data-reveal]').forEach((el) => {
-    if (el.getBoundingClientRect().top < innerHeight * 0.92) return;
-    gsap.from(el, {
-      opacity: 0, y: 26, duration: 0.7, ease: 'power2.out',
-      scrollTrigger: { trigger: el, start: 'top 85%', once: true },
+  const below = [...document.querySelectorAll('[data-reveal]')].filter(
+    (el) => el.getBoundingClientRect().top >= innerHeight * 0.92,
+  );
+  const lists = below.filter((el) => el.matches('ul'));
+  const heads = below.filter((el) => el.matches('h2'));
+  const blocks = below.filter((el) => !lists.includes(el) && !heads.includes(el));
+
+  gsap.set(blocks, { opacity: 0, y: 26 });
+  ScrollTrigger.batch(blocks, {
+    start: 'top 85%', once: true,
+    onEnter: (batch) => gsap.to(batch, { opacity: 1, y: 0, duration: 0.65, ease: 'power2.out', stagger: 0.08 }),
+  });
+
+  // Pill lists ripple in item by item instead of moving as one slab.
+  lists.forEach((ul) => {
+    const items = ul.children;
+    gsap.set(items, { opacity: 0, y: 18 });
+    ScrollTrigger.create({
+      trigger: ul, start: 'top 85%', once: true,
+      onEnter: () => gsap.to(items, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', stagger: 0.06 }),
     });
   });
+
+  // Section headings slide up word by word from behind a clip line.
+  heads.forEach((h) => {
+    const words = splitWords(h);
+    gsap.set(words, { yPercent: 112 });
+    ScrollTrigger.create({
+      trigger: h, start: 'top 85%', once: true,
+      onEnter: () => gsap.to(words, { yPercent: 0, duration: 0.7, ease: 'power3.out', stagger: 0.06 }),
+    });
+  });
+
   // Re-measure trigger positions once every asset has loaded and laid out.
   addEventListener('load', () => ScrollTrigger.refresh(), { once: true });
+}
+
+// Wrap each word in an overflow-hidden span so it can slide up into view.
+// The original text is kept on aria-label for screen readers.
+function splitWords(el) {
+  const text = el.textContent.trim();
+  el.setAttribute('aria-label', text);
+  el.textContent = '';
+  return text.split(/\s+/).map((word, i) => {
+    const outer = document.createElement('span');
+    outer.className = 'split-word';
+    outer.setAttribute('aria-hidden', 'true');
+    const inner = document.createElement('span');
+    inner.textContent = word;
+    outer.appendChild(inner);
+    if (i) el.append(' ');
+    el.append(outer);
+    return inner;
+  });
+}
+
+// Gentle cursor-attract on [data-magnet] elements (contact CTA).
+function initMagnet() {
+  if (reduced || matchMedia('(hover: none)').matches) return;
+  document.querySelectorAll('[data-magnet]').forEach((el) => {
+    const xTo = gsap.quickTo(el, 'x', { duration: 0.4, ease: 'power3.out' });
+    const yTo = gsap.quickTo(el, 'y', { duration: 0.4, ease: 'power3.out' });
+    let rect;
+    el.addEventListener('mouseenter', () => { rect = el.getBoundingClientRect(); });
+    el.addEventListener('mousemove', (e) => {
+      if (!rect) return;
+      xTo((e.clientX - rect.left - rect.width / 2) * 0.2);
+      yTo((e.clientY - rect.top - rect.height / 2) * 0.3);
+    });
+    el.addEventListener('mouseleave', () => { xTo(0); yTo(0); });
+  });
 }
 
 async function boot() {
@@ -78,6 +140,7 @@ async function boot() {
   if (meta?.bgLightHex) document.documentElement.style.setProperty('--bg-light', meta.bgLightHex);
   updateLoader(38, 'Preparing the canvas');
   initModelGallery(); // Plain DOM, so it works in static mode too.
+  initMagnet();
   if (!meta || reduced || location.search.includes('nofx')) {
     staticMode(meta);
     return;
@@ -88,8 +151,9 @@ async function boot() {
   gsap.ticker.add((t) => lenis.raf(t * 1000));
   gsap.ticker.lagSmoothing(0);
 
-  // Anchor navigation glides with Lenis instead of jumping.
-  document.querySelectorAll('a[href^="#"]').forEach((a) => {
+  // Anchor navigation glides with Lenis instead of jumping. The skip link is
+  // excluded so the browser's default jump also moves keyboard focus.
+  document.querySelectorAll('a[href^="#"]:not(.skip-link)').forEach((a) => {
     a.addEventListener('click', (e) => {
       const target = document.querySelector(a.getAttribute('href'));
       if (!target) return;
